@@ -23,8 +23,11 @@ public class JpaMain {
         try {
             //JPA는 DB 테이블 대상으로 코드를 짜지 않음.
             //객체를 대상으로 코드를 짬
+            //페이징도 가능!
             List<Member> selectResult = em.createQuery("select m from Member as m", Member.class)
-                    .getResultList();
+                    .setFirstResult(0)  //0번부터
+                    .setMaxResults(2)   //2개 데이터
+                    .getResultList();   //조회
 
             for(Member member : selectResult) {
                 System.out.println("member.name = " + member.getName());
